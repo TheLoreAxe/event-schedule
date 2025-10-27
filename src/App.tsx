@@ -3,16 +3,16 @@ import "./App.css";
 
 const SHEET_ID = "1_ORYmMRQkNPiFEWZRnII9ob3-0poadLy_83OBSw0U1Q";
 const API_KEY = "AIzaSyDdUVN3znMFnQ9LPvRfq42pwny7RZ9xBDI";
-const RANGE = "Sheet1!A:B"; // event in A, time in B
+const RANGE = "Sheet1!A:C"; // A = event, B = time, C = image base name
 
 interface EventItem {
-  name: string;
-  time: string; // "13:30"
+  time: string;   // "13:30"
+  image: string;  // from col C
 }
 
 export default function EventDisplay() {
   const [events, setEvents] = useState<EventItem[]>([]);
-  const [display, setDisplay] = useState<{ text: string; sub: string } | null>(
+  const [display, setDisplay] = useState<{ sub: string; bg: string } | null>(
     null
   );
   const latestRequestId = useRef(0);
@@ -31,9 +31,9 @@ export default function EventDisplay() {
 
         const rows = json.values.slice(1);
         const processed: EventItem[] = rows.map(
-          ([name, time]: [string, string]) => ({
-            name: name || "",
+          ([, time, image]: [string, string, string]) => ({
             time: time || "",
+            image: (image || "schedule") + ".jpg",
           })
         );
         setEvents(processed);
@@ -64,7 +64,7 @@ export default function EventDisplay() {
         });
 
       if (!active) {
-        setDisplay(null);
+        setDisplay({ sub: "", bg: "schedule.jpg" });
         return;
       }
 
@@ -73,17 +73,17 @@ export default function EventDisplay() {
         const mins = Math.floor(diff / 60);
         const secs = Math.floor(diff % 60);
         setDisplay({
-          text: active.name,
           sub: `Starts in ${mins}:${secs.toString().padStart(2, "0")}`,
+          bg: active.image,
         });
       } else {
         const past = -diff;
         if (past <= 180) {
-          setDisplay({ text: active.name, sub: "Starting Now" });
+          setDisplay({ sub: "Starting Now", bg: active.image });
         } else if (past <= 600) {
-          setDisplay({ text: active.name, sub: "In Progress" });
+          setDisplay({ sub: "In Progress", bg: active.image });
         } else {
-          setDisplay(null);
+          setDisplay({ sub: "", bg: "schedule.jpg" });
         }
       }
     }, 1000);
@@ -92,16 +92,23 @@ export default function EventDisplay() {
   }, [events]);
 
   // Render
-  if (!display) {
-    return <div className="background full-schedule"></div>;
-  }
-
   return (
-    <div className="background empty-schedule">
-      <div className="event-info">
-        <h1 className="event-title">{display.text}</h1>
+    <div
+      className="event"
+      style={{
+        backgroundImage: `url(${display?.bg || "schedule.jpg"})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {display?.sub && (
         <p className="event-sub">{display.sub}</p>
-      </div>
+      )}
     </div>
   );
 }

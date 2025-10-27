@@ -1,5 +1,5 @@
 :root {
-  --brand-blue: #0d3a57; /* #001d48 NO */  /* #022a44 Primary*/ /* #0d3a57 Secondary */
+  --brand-blue: #0a2e46; /* #001d48 NO */  /* #022a44 Primary*/ /* #0d3a57 Secondary */
   --core-yellow: #fdd900; /* #fdd900 Primary */  /* #faf19b Eric */ /* #F6e27a MJS */ /* #f6e27a Secondary */
   --har-coral: #FF808B; /* #ff4d4d Primary */  /* #ff4d4d Secondary */
   --text-color: #ffffff;
@@ -7,42 +7,9 @@
   --surface: #ffffff;
 }
 
-.background {
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* Idle background */
-.full-schedule {
-  background-image: url('/TradeshowScheduleGraphic_4K_2025.jpg');
-}
-
-/* Event background */
-.empty-schedule {
-  background-image: url('/TradeshowScheduleGraphic_4K_2025_Back.jpg');
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.event-info {
-  color: var(--brand-blue);
-  transform: translateY(-15vh);
-}
-
-.event-title {
-  font-size: 5rem;
-  font-weight: bold;
-  margin: 20%;
-  justify-content: center;
-  display: flex;
-}
-
 .event-sub {
+  padding-top: 50%;
   font-size: 4.3rem;
   margin-top: 1rem;
+  color: var(--brand-blue);
 }
