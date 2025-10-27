@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 
-const SHEET_ID = "1_ORYmMRQkNPiFEWZRnII9ob3-0poadLy_83OBSw0U1Q";
-const API_KEY = "AIzaSyDdUVN3znMFnQ9LPvRfq42pwny7RZ9xBDI";
+const SHEET_ID = "";
+const API_KEY = "";
 const RANGE = "Sheet1!A:C"; // A = event, B = time, C = image base name
 
 interface EventItem {
