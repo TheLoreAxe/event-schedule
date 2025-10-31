@@ -1,69 +1,38 @@
-# React + TypeScript + Vite
+# Tradeshow Event Schedule Display (Internal)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Carolina One only** — A full-screen, vertical TV display showing today’s tradeshow schedule. Events are pulled live from our internal Google Sheet and update automatically.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What It Shows
 
-## Expanding the ESLint configuration
+- **Default View**: Full-day schedule graphic with all events, times, and locations  
+- **10 Minutes Before Any Event**: Switches to a **large countdown timer**  
+- **Event Start**: Briefly displays **"Event Beginning Now"**  
+- **5 Minutes In**: Updates to **"Event In Progress"**  
+- **After**: Returns to the **main schedule view**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Runs 24/7 on dedicated hallway TVs in **portrait mode**.
+![schedule (Large)](https://github.com/user-attachments/assets/da876dee-30eb-490f-ae3f-080660b988a3)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Key Behaviors
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Auto-refreshes from the **internal event sheet** every 30 seconds  
+- Handles multiple events per day with smooth transitions  
+- Uses **local device time** — keep display clocks synced  
+- No interaction needed — fully automated
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Display Notes
+
+- **Orientation**: Portrait (1080x1920)  
+- **Hardware**: Assigned mini PCs (kiosk mode, auto-launch)  
+- **Network**: Connected to internal WiFi (sheet access via service account)  
+- **Branding**: Uses official tradeshow graphics and colors
+
+---
